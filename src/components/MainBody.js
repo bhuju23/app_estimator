@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { Grid, Box } from '@material-ui/core';
+import { Grid, Box, Button } from '@material-ui/core';
 import CheckItems from "./CheckItems";
+import useCalulate from './useCalculate';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -12,37 +13,58 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+
+
 const MainBody = () => {
 
-    const [projectSize, setProjectSize] = useState('');
-    const [mobileDevice, setMobileDevice] = useState(false);
-    const [iosChange, setIosChange] = useState(false);
-    const [androidChange, setAndroidChange] = useState(false);
-    const [webChange, setWebChange] = useState(false);
-    const [frontend, setFrontend] = useState(false);
-    const [backend, setBackend] = useState(false);
-    const [design, setDesign] = useState(false);
-    const [userAccounts, setUserAccounts] = useState(false);
-    const [facebook, setFacebook] = useState(false);
-    const [email, setEmail] = useState(false);
-    const [google, setGoogle] = useState(false);
-    const [userDashboard, setUserDashboard] = useState(false);
-    const [fileUploading, setFileUploading] = useState(false);
-    const [userProfile, setUserProfile] = useState(false);
-    const [maps, setMaps] = useState(false);
-    const [userSubscriptions, setUserSubscriptions] = useState(false);
+    const[budget, setBudget] = useState(0);
 
-    console.log(iosChange, "check");
+    const {projectSize, 
+        
+        mobileDevice,
+         setMobileDevice, 
+         ios, 
+         setIos,
+          android,
+           setAndroid,
+           web, 
+           setWeb, 
+           frontend, 
+           setFrontend,
+           backend,
+            setBackend,
+            design, 
+            setDesign,
+            userAccounts, 
+            setUserAccounts,
+            facebook, 
+            setFacebook,
+            email, 
+            setEmail,
+            google, setGoogle,
+            userDashboard, setUserDashboard,
+            fileUploading, setFileUploading,
+            userProfile, setUserProfile,
+            maps, setMaps,
+            userSubscriptions, setUserSubscriptions,
+           handleProjectSizeChange, calculate} = useCalulate();
+   
     
+  
 
-    const handleProjectSizeChange = (value, size)=>{
-        setProjectSize(value ? size : null);
-    }
+    
 
     const handleMobileChange = () =>{
         
         setMobileDevice(prevState=> !prevState); 
         
+    }
+
+    const handleClick = ()=>{
+        var c = calculate();
+        console.log(c, "test");
+
+        setBudget(c);
     }
 
     const classes = useStyles();
@@ -88,17 +110,17 @@ return(
                 </Grid>
                 <Grid item xs={3} md={2}>
                     <Box display="flex" justifyContent="center" >
-                        <CheckItems onChange={()=> setIosChange(prevState => !prevState)} label={"ios"} src={"https://dev.w3dev.in/wp-content/uploads/2018/10/duotone-6.png"} value={iosChange} disable={!mobileDevice}/>
+                        <CheckItems onChange={()=> setIos(prevState => !prevState)} label={"ios"} src={"https://dev.w3dev.in/wp-content/uploads/2018/10/duotone-6.png"} value={ios} disable={!mobileDevice}/>
                     </Box>
                 </Grid>
                 <Grid item xs={3} md={2}>
                     <Box display="flex" justifyContent="center" >
-                        <CheckItems onChange={()=>setAndroidChange(prevState => !prevState)} label={"Android"} src={"https://dev.w3dev.in/wp-content/uploads/2018/10/duotone-6.png"} value={androidChange} disable={!mobileDevice}/>
+                        <CheckItems onChange={()=>setAndroid(prevState => !prevState)} label={"Android"} src={"https://dev.w3dev.in/wp-content/uploads/2018/10/duotone-6.png"} value={android} disable={!mobileDevice}/>
                     </Box>
                 </Grid>
                 <Grid item xs={3} md={3}>
                     <Box display="flex" justifyContent="center" >
-                        <CheckItems onChange={()=>setWebChange(prevState => !prevState)} label={"Web"} src={"https://dev.w3dev.in/wp-content/uploads/2018/10/duotone-6.png"} value={webChange} />
+                        <CheckItems onChange={()=>setWeb(prevState => !prevState)} label={"Web"} src={"https://dev.w3dev.in/wp-content/uploads/2018/10/duotone-6.png"} value={web} />
                     </Box>
                 </Grid>
            </Grid>
@@ -154,35 +176,37 @@ return(
                 </Grid>
                 <Grid item xs={4} md={3}>
                     <Box display="flex" justifyContent="center" >
-                        <CheckItems onChange={()=>setUserDashboard(prevState => !prevState)} label={"FrontEnd"} src={"https://dev.w3dev.in/wp-content/uploads/2018/10/duotone-6.png"} value={userDashboard} />
+                        <CheckItems onChange={()=>setUserDashboard(prevState => !prevState)} label={"User Dashboard"} src={"https://dev.w3dev.in/wp-content/uploads/2018/10/duotone-6.png"} value={userDashboard} />
                     </Box>
                 </Grid>
                 <Grid item xs={4} md={3}>
                     <Box display="flex" justifyContent="center" >
-                        <CheckItems onChange={()=> setFileUploading(prevState => !prevState)} label={"BackEnd"} src={"https://dev.w3dev.in/wp-content/uploads/2018/10/duotone-6.png"} value={fileUploading} />
+                        <CheckItems onChange={()=> setFileUploading(prevState => !prevState)} label={"File Uploading"} src={"https://dev.w3dev.in/wp-content/uploads/2018/10/duotone-6.png"} value={fileUploading} />
                     </Box>
                 </Grid>
                 <Grid item xs={4} md={3}>
                     <Box display="flex" justifyContent="center" >
-                        <CheckItems onChange={()=>setUserProfile(prevState => !prevState)} label={"Design"} src={"https://dev.w3dev.in/wp-content/uploads/2018/10/duotone-6.png"} value={userProfile} />
+                        <CheckItems onChange={()=>setUserProfile(prevState => !prevState)} label={"User Profile"} src={"https://dev.w3dev.in/wp-content/uploads/2018/10/duotone-6.png"} value={userProfile} />
                     </Box>
                 </Grid>
                 <Grid item xs={12} md={3}>
                 </Grid>
                 <Grid item xs={4} md={3}>
                     <Box display="flex" justifyContent="center" >
-                        <CheckItems onChange={()=>setMaps(prevState => !prevState)} label={"FrontEnd"} src={"https://dev.w3dev.in/wp-content/uploads/2018/10/duotone-6.png"} value={maps} />
+                        <CheckItems onChange={()=>setMaps(prevState => !prevState)} label={"Maps"} src={"https://dev.w3dev.in/wp-content/uploads/2018/10/duotone-6.png"} value={maps} />
                     </Box>
                 </Grid>
                 <Grid item xs={4} md={3}>
                     <Box display="flex" justifyContent="center" >
-                        <CheckItems onChange={()=> setUserSubscriptions(prevState => !prevState)} label={"BackEnd"} src={"https://dev.w3dev.in/wp-content/uploads/2018/10/duotone-6.png"} value={userSubscriptions} />
+                        <CheckItems onChange={()=> setUserSubscriptions(prevState => !prevState)} label={"User Subscriptions"} src={"https://dev.w3dev.in/wp-content/uploads/2018/10/duotone-6.png"} value={userSubscriptions} />
                     </Box>
                 </Grid>
             </Grid>
+            <Button onClick={handleClick}>Calculate</Button>
+            <p>Rs.{budget}</p>
         </Container>
     </>
-);
+);  
 
 }
 
