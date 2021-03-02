@@ -1,10 +1,31 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Typography } from '@material-ui/core';
 import { Checkbox } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-    
+    image:{
+        height: "60px",
+        marginBottom: "20px"
+    },
+
+    box: {
+        height: "200px",
+        width: "200px",
+        border: "1px solid #000",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    text:{
+        marginTop: "10px",
+        fontSize: "20px"
+
+    },
+    checkbox: {
+        top: "-15px",
+        right: "-65px"
+    }
 }));
 
 const CheckItems = (props) =>{
@@ -22,20 +43,19 @@ const CheckItems = (props) =>{
         }
     }
 
-  console.log(props.value);
+  
 
 return(
     <>
-       <Box onClick={handleClick} display="flex" flexDirection="column">
+       <Box className={classes.box} onClick={handleClick} flexDirection="column">
         <Checkbox
         checked={props.value}
         color="primary"
         disabled = {props.disable}
-        // value = {props.value}
-        // onChange ={()=>{}}
+        className={classes.checkbox}
         />
-        <img src = {props.src}></img>   
-        <Typography align="center">
+        <img className ={classes.image} src = {props.src}></img>   
+        <Typography className={classes.text} align="center">
             {props.label}
         </Typography>
        </Box>

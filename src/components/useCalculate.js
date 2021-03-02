@@ -20,6 +20,12 @@ const useCalculate = ()=>{
     const [maps, setMaps] = useState(false);
     const [userSubscriptions, setUserSubscriptions] = useState(false); 
 
+    const[formEmail, setFormEmail] = useState('');
+    const[fname, setFname] = useState("");
+    const[lname, setLname] = useState("");
+    const[phone, setPhone] = useState('');
+    const[description, setDescription] = useState("");
+
     const handleProjectSizeChange = (value, size)=>{
         setProjectSize(value ? size : null);
         
@@ -114,6 +120,10 @@ const useCalculate = ()=>{
             userSubscriptions, setUserSubscriptions,
            handleProjectSizeChange,
             calculate,
+            formEmail,
+            fname, lname, phone, description,
+            setFormEmail,
+            setFname, setLname, setPhone, setDescription
             
         }
 }
